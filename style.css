@@ -1,0 +1,38 @@
+#timetable-grid {
+            display: grid;
+            grid-template-columns: 80px repeat(26, minmax(30px, 1fr));
+        }
+
+.slot {
+    min-height: 80px;
+    border-right: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.day-label {
+    min-height: 80px;
+}
+
+.mon{
+    background-color: #ffc64b;
+}
+
+.tue{
+    background-color: #f254ff;
+}
+
+.wed{
+    background-color: #20dc29;
+}
+
+.thu{
+    background-color: #ff904b;
+}
+
+.fri{
+    background-color: #1fbcff;
+}
+
+.sat{
+    background-color: #bb41fc;
+}

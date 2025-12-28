@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyTable</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-300 p-4 md:p-8">
+
+
+    <div class="max-w-7xl mx-auto flex justify-between items-center m-8">
+        <h1 class="text-3xl font-black tracking-tighter uppercase">My <span class="text-blue-600">Table</span></h1>
+        <div class="flex gap-2">
+<!--            <button onclick="toggleDarkMode()" class="bg-slate-800 dark:bg-slate-800 p-2 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700">🌓 Mode</button>-->
+            <button onclick="exportImage()" class="bg-emerald-600 text-white px-4 py-2 rounded-lg font-bold shadow-md hover:bg-emerald-700">📸 Save Image</button>
+        </div>
+    </div>
+
+    <div class="m-6 p-4 bg-slate-800 rounded shadow">
+      <div class="flex w-100 justify-end">
+
+      </div>
+
+      <div class="w-100" id="capture-area">
+        <div class="w-100" id="timetable-grid"></div>
+      </div>
+
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6 p-4 bg-slate-800 rounded shadow m-5">
+    <input id="className" type="text" placeholder="Class Name" class="border p-2 rounded bg-slate-700">
+      <input id="classPlace" type="text" placeholder="Class Place" class="border p-2 rounded bg-slate-700">
+
+    <select id="daySelect" class="border p-2 rounded bg-slate-700">
+        <option value="MON">Monday</option>
+        <option value="TUE">Tuesday</option>
+        <option value="WED">Wednesday</option>
+        <option value="THU">Thursday</option>
+        <option value="FRI">Friday</option>
+        <option value="SAT">Saturday</option>
+    </select>
+
+    <div class="flex gap-2">
+        <input id="startTime" type="time" value="08:00" class="border p-2 rounded w-full bg-slate-700">
+        <input id="endTime" type="time" value="09:00" class="border p-2 rounded w-full bg-slate-700">
+    </div>
+
+    <button onclick="processInput()" class="bg-blue-600 text-white p-2 rounded font-bold">Add Class</button>
+    </div>
+
+    <div class="flex flex-col mb-6 p-4 bg-slate-800 rounded shadow m-5">
+      <h1 class="text-3xl font-bold">Classes</h1>
+      <div class="flex flex-col" id="classes-list">
+
+      </div>
+    </div>
+
+  <script src="scripts.js" defer></script>
+</body>
+</html>
