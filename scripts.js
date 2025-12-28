@@ -1,18 +1,17 @@
 
-// Change this line
 const DAYS = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];const grid = document.getElementById('timetable-grid');
 let myClasses = JSON.parse(localStorage.getItem('savedClasses')) || [];
 
 
 function initTable(){
     grid.innerHTML = '';
-    // 1. Top Left Corner
+    //Top Left Corner
         const corner = document.createElement('div');
         corner.className = "text-start py-2 bg-slate-800 text-white text-[10px] font-bold border-r border-b border-slate-700";
         corner.innerText = "Date/Time";
         grid.appendChild(corner);
 
-        // 2. Time Labels (8:00 - 20:00)
+        //Time Labels (8:00 - 20:00)
         for (let i = 0; i < 13; i++) {
             const label = document.createElement('div');
             label.className = "col-span-2 text-start py-2 bg-slate-800 text-white text-[10px] font-bold border-r border-b border-slate-700";
@@ -20,7 +19,7 @@ function initTable(){
             grid.appendChild(label);
         }
 
-        // 3. Days & Slots
+        //Days & Slots
         DAYS.forEach(day => {
             const dayLabel = document.createElement('div');
             dayLabel.className = `text-black font-black flex items-center justify-center border-r border-b border-slate-300 dark:border-slate-700 text-[10px] ${day.toLowerCase()}`;
