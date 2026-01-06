@@ -107,6 +107,22 @@ function deleteClass(id) {
             myClasses = myClasses.filter(c => c.id !== id);
             saveAndRefresh();}
 
+function deleteAllClasses() {
+    if (myClasses.length === 0) {
+        alert('No classes to delete!');
+        return;
+    }
+    
+    const confirmed = confirm(`Are you sure you want to delete all ${myClasses.length} classes? This cannot be undone.`);
+    if (confirmed) {
+        myClasses = [];
+        saveAndRefresh();
+        alert('All classes deleted!');
+    }
+}
+
+
+
 function exportImage(){
     const area = document.getElementById('capture-area');
             html2canvas(area, { scale: 3, backgroundColor: null }).then(canvas => {
@@ -115,6 +131,98 @@ function exportImage(){
                 link.href = canvas.toDataURL();
                 link.click();
             });
+}
+
+function downloadTextFile() {
+    if (myClasses.length === 0) {
+        alert('No classes to export!');
+        return;
+    }
+    
+    const lines = myClasses.map(c => {
+        return `${c.name}, ${c.day}, ${c.startStr}, ${c.endStr}, ${c.place}`;
+    });
+    
+    const content = lines.join('\n');
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    
+    const link = document.createElement('a');
+    link.download = 'timetable_classes.txt';
+    link.href = url;
+    link.click();
+    
+    URL.revokeObjectURL(url);
+}
+
+function importFromFile(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const text = e.target.result;
+        const lines = text.split('\n').filter(line => line.trim() !== '');
+        
+        const newClasses = [];
+        let hasError = false;
+        
+        lines.forEach((line, index) => {
+            const parts = line.split(',').map(s => s.trim());
+            
+            if (parts.length < 4) {
+                alert(`Error on line ${index + 1}: Expected format "name, day, startTime, endTime, place (optional)"`);
+                hasError = true;
+                return;
+            }
+            
+            const [name, day, startStr, endStr, place = ''] = parts;
+            
+            // Validate day
+            if (!DAYS.includes(day.toUpperCase())) {
+                alert(`Error on line ${index + 1}: Invalid day "${day}". Use MON, TUE, WED, THU, FRI, or SAT`);
+                hasError = true;
+                return;
+            }
+            
+            const startSlot = timeToSlot(startStr);
+            const endSlot = timeToSlot(endStr);
+            const duration = endSlot - startSlot;
+            
+            if (duration <= 0) {
+                alert(`Error on line ${index + 1}: End time must be after start time`);
+                hasError = true;
+                return;
+            }
+            
+            newClasses.push({
+                id: Date.now() + index,
+                name,
+                day: day.toUpperCase(),
+                place,
+                startSlot,
+                duration,
+                startStr,
+                endStr
+            });
+        });
+        
+        if (!hasError && newClasses.length > 0) {
+            const shouldReplace = confirm(`Found ${newClasses.length} classes. Replace existing classes?\n\nClick OK to replace, Cancel to merge with existing.`);
+            
+            if (shouldReplace) {
+                myClasses = newClasses;
+            } else {
+                myClasses = [...myClasses, ...newClasses];
+            }
+            
+            saveAndRefresh();
+            alert(`Successfully imported ${newClasses.length} classes!`);
+        }
+    };
+    
+    reader.readAsText(file);
+    event.target.value = ''; // Reset input
 }
 
 

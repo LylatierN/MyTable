@@ -1,0 +1,10 @@
+Introduction to Computer Science, MON, 09:00, 12:00, Building A Room 101
+Data Structures and Algorithms, MON, 13:00, 15:00, Computer Lab 2
+Calculus I, TUE, 09:00, 12:00, Science Building 301
+Physics Laboratory, TUE, 13:00, 16:00, Physics Lab B
+Database Systems, WED, 10:00, 12:00, IT Building Room 205
+Web Development, WED, 13:00, 16:00, Computer Lab 1
+Discrete Mathematics, THU, 09:30, 12:00, Math Building 402
+Operating Systems, THU, 13:00, 15:00, Computer Lab 3
+Machine Learning, FRI, 13:00, 15:00, AI Lab
+English Communication, SAT, 10:00, 11:30, Language Center

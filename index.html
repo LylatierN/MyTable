@@ -14,6 +14,7 @@
     <div class="max-w-7xl mx-auto flex justify-between items-center m-8">
         <h1 class="text-3xl font-black tracking-tighter uppercase">My <span class="text-blue-600">Table</span></h1>
         <div class="flex gap-2">
+            <button onclick="downloadTextFile()" class="bg-purple-600 text-white px-4 py-2 rounded-lg font-bold shadow-md hover:bg-purple-700">💾 Download .txt</button>
             <button onclick="exportImage()" class="bg-emerald-600 text-white px-4 py-2 rounded-lg font-bold shadow-md hover:bg-emerald-700">📸 Save Image</button>
         </div>
     </div>
@@ -51,7 +52,17 @@
     </div>
 
     <div class="flex flex-col mb-6 p-4 bg-slate-800 rounded shadow m-5">
-      <h1 class="text-3xl font-bold">Classes</h1>
+      <div class="flex justify-between mb-2">
+        <h1 class="text-3xl font-bold">Classes</h1>
+        <div class="flex gap-2">
+          <button onclick="deleteAllClasses()" class="bg-red-600 text-white px-4 py-2 rounded-lg font-bold shadow-md hover:bg-red-700"> X Delete All</button>
+          <label class="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold shadow-md hover:bg-blue-700 cursor-pointer">
+                  📁 Upload Classes
+                  <input type="file" id="fileInput" accept=".txt" onchange="importFromFile(event)" class="hidden">
+              </label>
+        </div>
+      </div>
+      
       <div class="flex flex-col" id="classes-list">
 
       </div>
